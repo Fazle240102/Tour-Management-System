@@ -1,168 +1,290 @@
-# 🗺️ Tour Management System
+# Tour Management System
 
-A full-stack web application for managing tour packages, customers, bookings, payments, and reviews. Built with **FastAPI (Python)** backend, **Vanilla JS + Bootstrap** frontend, and **MySQL** (via XAMPP/phpMyAdmin).
+A full-stack **Tour Management System (TMS)** developed as an academic **DBMS project**. The system provides a centralized web interface for managing tour packages, customers, bookings, payments, reviews, tour guides, locations, hotels, and analytics.
 
----
+The application follows a practical client–server architecture with a **FastAPI REST API**, **Vanilla JavaScript + Bootstrap frontend**, and **MySQL/MariaDB database**.
+
+## ✨ Key Features
+
+- 📊 Interactive dashboard with operational statistics
+- 🧑‍🤝‍🧑 Customer management with full CRUD operations
+- 🗺️ Tour package management
+- 🧾 Booking and traveler-detail management
+- 💳 Payment management with multiple payment methods
+- ⭐ Review and rating management
+- 🧑‍💼 Tour guide management with multilingual information
+- 📍 Location management
+- 🏨 Hotel management
+- 📈 Analytics dashboard with Chart.js visualizations
+- 🔌 RESTful API with FastAPI
+- 📚 Interactive Swagger/OpenAPI documentation
+- 🗄️ MySQL/MariaDB relational database
+- 📱 Responsive SPA-style dashboard interface
+
+## 🏗️ System Architecture
+
+```text
+┌─────────────────────────────┐
+│     Web Frontend            │
+│ HTML + CSS + Bootstrap + JS │
+│        + Chart.js           │
+└──────────────┬──────────────┘
+               │ HTTP / JSON
+               ▼
+┌─────────────────────────────┐
+│       FastAPI Backend       │
+│ REST API + Pydantic Models  │
+│        + API Routers        │
+└──────────────┬──────────────┘
+               │ SQL
+               ▼
+┌─────────────────────────────┐
+│       MySQL / MariaDB       │
+│   Relational Database       │
+└─────────────────────────────┘
+```
+
+## 🧩 Main Modules
+
+| Module | Functionality |
+|---|---|
+| Dashboard | Operational statistics and recent activity |
+| Customers | Create, read, update and delete customer records |
+| Tour Packages | Manage packages and related resources |
+| Bookings | Manage bookings and traveler details |
+| Payments | Track booking payments and payment methods |
+| Reviews | Manage ratings and customer feedback |
+| Tour Guides | Manage guides and supported languages |
+| Locations | Manage destinations and seasonal information |
+| Hotels | Manage hotels, ratings and locations |
+| Analytics | SQL-driven performance and business insights |
+
+## 🗄️ Database
+
+The project uses a relational **MySQL/MariaDB** database and includes the complete database dump in:
+
+```text
+database/tourmanagementsystem.sql
+```
+
+The database covers entities and relationships for customers, bookings, tour packages, payments, reviews, guides, locations, hotels, and traveler details.
+
+The SQL dump contains **sample/demo data** for academic testing and demonstration.
+
+## 🛠️ Technology Stack
+
+| Layer | Technologies |
+|---|---|
+| Frontend | HTML5, CSS3, Bootstrap 5.3, Vanilla JavaScript |
+| Visualization | Chart.js |
+| Backend | Python 3.10+, FastAPI, Uvicorn |
+| Validation | Pydantic |
+| Database | MySQL / MariaDB |
+| Database Driver | mysql-connector-python |
+| Configuration | python-dotenv |
+| API Style | RESTful JSON API |
+| Documentation | Swagger / OpenAPI |
 
 ## 📁 Project Structure
 
-```
-tour-management-system/
-├── backend/                    # FastAPI Python backend
-│   ├── main.py                 # App entry point & routes
-│   ├── database.py             # DB connection
-│   ├── requirements.txt        # Python dependencies
-│   ├── .env.example            # Environment variables template
-│   └── routers/
-│       ├── customers.py
-│       ├── tourpackages.py
-│       ├── tourguides.py
-│       ├── locations.py
-│       ├── hotels.py
-│       ├── bookings.py
-│       ├── payments.py
-│       ├── reviews.py
-│       └── analytics.py
-├── frontend/                   # HTML/CSS/JS frontend
-│   ├── index.html              # Main SPA shell
-│   └── assets/
-│       ├── css/style.css       # All styles
-│       └── js/
-│           ├── utils.js        # API helpers, utils
-│           └── pages/          # Page-specific JS
-│               ├── dashboard.js
-│               ├── customers.js
-│               ├── tourpackages.js
-│               ├── bookings.js
-│               ├── payments.js  # Also includes reviews, guides, locations, hotels
-│               └── analytics.js
-├── database/
-│   └── tourmanagementsystem.sql  # Full DB dump
+```text
+Tour-Management-System/
 ├── .github/
 │   └── workflows/
-│       └── deploy.yml          # CI/CD (optional)
+│       └── deploy.yml
+├── backend/
+│   ├── main.py
+│   ├── database.py
+│   ├── requirements.txt
+│   ├── .env.example
+│   └── routers/
+│       ├── __init__.py
+│       ├── analytics.py
+│       ├── bookings.py
+│       ├── customers.py
+│       ├── hotels.py
+│       ├── locations.py
+│       ├── payments.py
+│       ├── reviews.py
+│       ├── tourguides.py
+│       └── tourpackages.py
+├── database/
+│   └── tourmanagementsystem.sql
+├── frontend/
+│   ├── index.html
+│   └── assets/
+│       ├── css/
+│       │   └── style.css
+│       └── js/
+│           ├── utils.js
+│           └── pages/
+│               ├── analytics.js
+│               ├── bookings.js
+│               ├── customers.js
+│               ├── dashboard.js
+│               ├── hotels.js
+│               ├── locations.js
+│               ├── payments.js
+│               ├── reviews.js
+│               ├── tourguides.js
+│               └── tourpackages.js
+├── .gitignore
 └── README.md
 ```
 
----
-
-## 🚀 Running Locally
+## 🚀 Getting Started
 
 ### Prerequisites
-- **XAMPP** (Apache + MySQL) running
-- **Python 3.10+** installed
-- Database imported via phpMyAdmin
 
-### Step 1 — Import the Database
-1. Open `http://localhost/phpmyadmin`
-2. Create database: `tourmanagementsystem`
-3. Click **Import** → select `database/tourmanagementsystem.sql` → Go
+- Python **3.10+**
+- MySQL or MariaDB
+- XAMPP is recommended for local MySQL/phpMyAdmin setup
 
-### Step 2 — Setup Backend
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/Fazle240102/Tour-Management-System.git
+cd Tour-Management-System
+```
+
+### 2. Set up the database
+
+Start MySQL through XAMPP, then open phpMyAdmin and create a database named:
+
+```text
+tourmanagementsystem
+```
+
+Import:
+
+```text
+database/tourmanagementsystem.sql
+```
+
+### 3. Configure the backend
 
 ```bash
 cd backend
+```
 
-# Copy environment file
+Create a local environment file from the provided template:
+
+```bash
+# Windows
+copy .env.example .env
+
+# macOS / Linux
 cp .env.example .env
-# Edit .env if your MySQL password is not empty
+```
 
-# Create virtual environment (recommended)
+Update the database credentials in `.env` if necessary.
+
+### 4. Create a virtual environment
+
+```bash
 python -m venv venv
+```
 
-# Activate (Windows)
+Windows:
+
+```bash
 venv\Scripts\activate
-# Activate (Mac/Linux)
+```
+
+macOS / Linux:
+
+```bash
 source venv/bin/activate
+```
 
-# Install dependencies
+### 5. Install dependencies
+
+```bash
 pip install -r requirements.txt
+```
 
-# Run the server
+### 6. Start the FastAPI server
+
+```bash
 uvicorn main:app --reload --host 0.0.0.0 --port 8000
 ```
 
-Backend will be live at: **http://localhost:8000**
-API docs (Swagger): **http://localhost:8000/docs**
+Backend:
 
-### Step 3 — Open Frontend
-
-Simply open `frontend/index.html` in your browser, OR serve it with a local server:
-
-```bash
-# Using Python
-cd frontend
-python -m http.server 5500
-
-# Then open: http://localhost:5500
+```text
+http://localhost:8000
 ```
 
-> **Important:** The frontend connects to `http://localhost:8000/api` by default. If your backend runs on a different port, edit the `API_BASE` variable in `frontend/assets/js/utils.js`.
+Interactive API documentation:
 
----
+```text
+http://localhost:8000/docs
+```
 
-## 🌐 Deployment
+### 7. Run the frontend
 
-### Backend → Render
-1. Push to GitHub
-2. Go to [render.com](https://render.com) → New Web Service
-3. Connect your repo → Set root dir to `backend`
-4. Build command: `pip install -r requirements.txt`
-5. Start command: `uvicorn main:app --host 0.0.0.0 --port $PORT`
-6. Add environment variables from `.env.example`
+From the project root:
 
-### Database → PlanetScale / Railway / Clever Cloud
-- Railway and Clever Cloud offer free MySQL hosting
-- Get your connection string and update the env vars on Render
+```bash
+cd frontend
+python -m http.server 5500
+```
 
-### Frontend → Vercel / Netlify
-1. Push `frontend/` folder to GitHub
-2. Connect to Vercel/Netlify
-3. Before deploying, update `API_BASE` in `utils.js` to your Render backend URL
+Then open:
 
----
+```text
+http://localhost:5500
+```
 
-## 📊 Features
+The frontend communicates with the FastAPI backend through the configured API base URL.
 
-| Feature | Description |
-|--------|------------|
-| **Dashboard** | Stats, charts, recent bookings |
-| **Customers** | Full CRUD with phone numbers & address |
-| **Tour Packages** | CRUD with location/guide/hotel relations |
-| **Bookings** | CRUD with traveler detail management |
-| **Payments** | CRUD with multiple payment methods |
-| **Reviews** | CRUD with star ratings |
-| **Tour Guides** | CRUD with multi-language support |
-| **Locations** | CRUD with seasonal info |
-| **Hotels** | CRUD with star ratings & location link |
-| **Analytics** | Complex SQL queries visualized as charts |
+## 🔌 API Resources
 
----
+The backend exposes REST endpoints for:
 
-## 🛠️ Tech Stack
+- `/api/customers`
+- `/api/tourpackages`
+- `/api/bookings`
+- `/api/payments`
+- `/api/reviews`
+- `/api/tourguides`
+- `/api/locations`
+- `/api/hotels`
+- `/api/analytics`
 
-| Layer | Technology |
-|-------|-----------|
-| Frontend | HTML5, CSS3, Bootstrap 5.3, Vanilla JS, Chart.js |
-| Backend | Python 3.10+, FastAPI, Pydantic |
-| Database | MySQL (MariaDB via XAMPP) |
-| ORM | Raw SQL (mysql-connector-python) |
-| API | RESTful JSON API |
+Each resource supports the relevant CRUD or analytics operations implemented by its router.
 
----
+## 📊 Analytics
 
-## 📌 API Endpoints Summary
+The analytics module provides SQL-driven insights including:
 
-| Resource | Endpoints |
-|---------|----------|
-| Customers | `GET/POST /api/customers`, `GET/PUT/DELETE /api/customers/{id}` |
-| Tours | `GET/POST /api/tourpackages`, `GET/PUT/DELETE /api/tourpackages/{id}` |
-| Bookings | `GET/POST /api/bookings`, `GET/PUT/DELETE /api/bookings/{id}` |
-| Payments | `GET/POST /api/payments`, `GET/PUT/DELETE /api/payments/{id}` |
-| Reviews | `GET/POST /api/reviews`, `GET/PUT/DELETE /api/reviews/{id}` |
-| Guides | `GET/POST /api/tourguides`, `GET/PUT/DELETE /api/tourguides/{id}` |
-| Locations | `GET/POST /api/locations`, `GET/PUT/DELETE /api/locations/{id}` |
-| Hotels | `GET/POST /api/hotels`, `GET/PUT/DELETE /api/hotels/{id}` |
-| Analytics | `GET /api/analytics/dashboard`, `/top-tours`, `/revenue-by-tour`, `/guide-performance`, `/location-popularity`, `/monthly-bookings` |
+- Dashboard statistics
+- Top-performing tours
+- Revenue by tour
+- Tour guide performance
+- Location popularity
+- Monthly booking trends
 
-Full interactive docs: `http://localhost:8000/docs`
+Results are visualized through **Chart.js** in the frontend dashboard.
+
+## 🔐 Configuration & Security
+
+- Environment-specific database credentials are stored through `.env`.
+- `.env.example` is included as a configuration template.
+- Actual `.env` files should remain local and should never be committed.
+- The included SQL data is intended for academic/demo purposes.
+
+## 🎓 Academic Context
+
+- **Project:** Tour Management System (TMS)
+- **Project Type:** Academic DBMS / Full-Stack Web Application
+- **Institution:** Daffodil International University
+- **Team:** Team Adrenaline
+
+## 👥 Team
+
+Developed collaboratively by **Team Adrenaline** at **Daffodil International University**.
+
+## 📌 Project Status
+
+Completed academic project demonstrating relational database design, REST API development, CRUD-based web application architecture, and analytics-driven dashboard functionality.
